@@ -535,20 +535,51 @@ Notes:
             kit_filename = format_kit_filename(i)
             kit_path = output_path / kit_filename
 
-            # Generate variation
-            variant_kit, mutated_voices = generate_variation(
-                source_kit, mutation_kits, args.n_mutations
-            )
+            if i == 0:
+                # First kit is always the unvaried source kit
+                variant_kit = Kit()
+                variant_kit.header = bytearray(source_kit.header)
+                for v_idx in range(4):
+                    variant_kit.set_voice(v_idx, source_kit.get_voice(v_idx))
 
-            # Save kit
-            variant_kit.save(str(kit_path))
-            voice_names = [f"V{v+1}" for v in mutated_voices]
-            print(f"  Generated: {kit_filename} (mutated: {', '.join(voice_names)})")
+                variant_kit.save(str(kit_path))
+                print(f"  Generated: {kit_filename} (original, unvaried)")
+            else:
+                # Generate variation
+                variant_kit, mutated_voices = generate_variation(
+                    source_kit, mutation_kits, args.n_mutations
+                )
+
+                # Save kit
+                variant_kit.save(str(kit_path))
+                voice_names = [f"V{v+1}" for v in mutated_voices]
+                print(f"  Generated: {kit_filename} (mutated: {', '.join(voice_names)})")
+
+        # Write info.md file
+        info_path = get_banks_directory(args.sd_path) / output_bank_id / 'info.md'
+        with open(info_path, 'w') as f:
+            f.write(f"# Bank {output_bank_id} - Kit Variations\n\n")
+            f.write(f"## Generation Details\n\n")
+            f.write(f"- **Script**: pykons-vary-kit\n")
+            f.write(f"- **Source Kit**: {source_bank_id}:{source_kit_id}\n")
+            f.write(f"- **Number of Variants**: {args.n_variants}\n")
+            f.write(f"- **Mutations per Variant**: {args.n_mutations} voices\n")
+            if args.seed is not None:
+                f.write(f"- **Random Seed**: {args.seed}\n")
+            f.write(f"- **Generated**: {__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+            f.write(f"## Kit Details\n\n")
+            f.write(f"- **Kit 00**: Original source kit (unvaried)\n")
+            f.write(f"- **Kits 01-{args.n_variants-1:02d}**: Variations with {args.n_mutations} voice(s) mutated\n\n")
+            f.write(f"## Voice Sources\n\n")
+            f.write(f"Mutation voices sourced from:\n")
+            f.write(f"- Bank 01 (kits 00-31)\n")
+            f.write(f"- Bank 02 (kits 32-63)\n")
 
         print(f"\n✓ Successfully generated {args.n_variants} variant(s) in bank {output_bank_id}")
         print(f"  Source: {source_bank_id}:{source_kit_id}")
         print(f"  Mutations per variant: {args.n_mutations} voices")
         print(f"  Location: {output_path}")
+        print(f"  Info file: {info_path}")
         print(f"\nYou can now eject the SD card and use the variants on your Perkons HD-01.")
 
     except KeyboardInterrupt:

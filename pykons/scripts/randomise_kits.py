@@ -471,8 +471,24 @@ Notes:
             random_kit.save(str(kit_path))
             print(f"  Generated: {kit_filename}")
 
+        # Write info.md file
+        info_path = get_banks_directory(args.sd_path) / output_bank_id / 'info.md'
+        with open(info_path, 'w') as f:
+            f.write(f"# Bank {output_bank_id} - Random Kits\n\n")
+            f.write(f"## Generation Details\n\n")
+            f.write(f"- **Script**: pykons-randomise-kits\n")
+            f.write(f"- **Number of Kits**: {args.n}\n")
+            if args.seed is not None:
+                f.write(f"- **Random Seed**: {args.seed}\n")
+            f.write(f"- **Generated**: {__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+            f.write(f"## Voice Sources\n\n")
+            f.write(f"Random voices sourced from:\n")
+            f.write(f"- Bank 01 (kits 00-31)\n")
+            f.write(f"- Bank 02 (kits 32-63)\n")
+
         print(f"\n✓ Successfully generated {args.n} kit(s) in bank {output_bank_id}")
         print(f"  Location: {output_path}")
+        print(f"  Info file: {info_path}")
         print(f"\nYou can now eject the SD card and use the kits on your Perkons HD-01.")
 
     except KeyboardInterrupt:

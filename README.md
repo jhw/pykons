@@ -101,6 +101,15 @@ The Perkons HD-01 SD card should be mounted at `/Volumes/Untitled` (macOS) with 
             └── ...
 ```
 
+### Recommended Sound Packs
+
+For the best experience with `pykons` tools, we recommend using the official Erica Synths sound packs as your source banks:
+
+- **[Perkons Kit Pack 1 by HRTL](https://www.ericasynths.lv/news/perkons-kit-pack-1-hrtl-now-available/)** - Install in Bank 01
+- **[Perkons Kit Pack 2](https://www.ericasynths.lv/news/perkons-kit-pack-2-out/)** - Install in Bank 02
+
+**Note**: Pack 1 populates kits 00-31, while Pack 2 populates kits 32-63 (not 00-31).
+
 ## File Format
 
 Perkons HD-01 .KIT files have two formats:
