@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pykons"
+version = "0.1.0"
+description = "Python tools for Erica Synths Perkons HD-01 drum machine KIT files"
+readme = "README.md"
+requires-python = ">=3.6"
+license = {text = "MIT"}
+authors = [
+    {name = "pykons contributors"}
+]
+keywords = ["erica-synths", "perkons", "drum-machine", "music", "audio"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/pykons"
+Issues = "https://github.com/yourusername/pykons/issues"
+
+[project.scripts]
+pykons-randomize = "pykons.scripts.randomize:main"
+pykons-delete-bank = "pykons.scripts.delete_bank:main"
+pykons-variation = "pykons.scripts.variation:main"
+
+[tool.setuptools]
+packages = ["pykons", "pykons.scripts"]
