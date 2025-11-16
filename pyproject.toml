@@ -36,6 +36,7 @@ Issues = "https://github.com/yourusername/pykons/issues"
 pykons-randomize = "pykons.scripts.randomize:main"
 pykons-delete-bank = "pykons.scripts.delete_bank:main"
 pykons-variation = "pykons.scripts.variation:main"
+pykons-list = "pykons.scripts.list_card:main"
 
 [tool.setuptools]
 packages = ["pykons", "pykons.scripts"]
