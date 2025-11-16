@@ -33,9 +33,9 @@ Homepage = "https://github.com/yourusername/pykons"
 Issues = "https://github.com/yourusername/pykons/issues"
 
 [project.scripts]
-pykons-randomize = "pykons.scripts.randomize:main"
+pykons-randomise-kits = "pykons.scripts.randomise_kits:main"
+pykons-vary-kit = "pykons.scripts.vary_kit:main"
 pykons-delete-bank = "pykons.scripts.delete_bank:main"
-pykons-variation = "pykons.scripts.variation:main"
 pykons-list = "pykons.scripts.list_card:main"
 
 [tool.setuptools]
